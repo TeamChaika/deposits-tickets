@@ -1,0 +1,6 @@
+fastapi
+supabase
+uvicorn
+email-validator
+requests
+
