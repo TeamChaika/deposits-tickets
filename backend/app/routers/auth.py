@@ -8,6 +8,7 @@ from app.schemas.auth import (
     ChangeEmailRequest,
     ChangePasswordRequest,
     LoginRequest,
+    LogoutRequest,
     MessageResponse,
     PasswordResetConfirmRequest,
     PasswordResetRequest,
@@ -18,6 +19,7 @@ from app.services.auth_service import (
     change_password,
     confirm_password_reset,
     login_user,
+    logout_user,
     register_user,
     request_password_reset,
 )
@@ -71,4 +73,12 @@ async def change_email_route(
     client: Client = Depends(get_supabase_client),
 ) -> MessageResponse:
     return await change_email(client=client, payload=payload)
+
+
+@router.post("/logout", response_model=MessageResponse)
+async def logout(
+    payload: LogoutRequest,
+    client: Client = Depends(get_supabase_client),
+) -> MessageResponse:
+    return await logout_user(client=client, access_token=payload.access_token)
 

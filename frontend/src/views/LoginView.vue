@@ -26,6 +26,8 @@ const handleChangeEmail = () =>
     access_token: store.accessToken,
     new_email: newEmail.value,
   });
+
+const handleLogout = () => store.logout();
 </script>
 
 <template>
@@ -51,6 +53,9 @@ const handleChangeEmail = () =>
     <div v-if="store.accessToken" class="token-box">
       <strong>Access Token:</strong>
       <code>{{ store.accessToken }}</code>
+      <button @click="handleLogout" class="logout-btn" :disabled="store.loading">
+        {{ store.loading ? "..." : "Выйти" }}
+      </button>
     </div>
 
     <hr />
@@ -145,6 +150,30 @@ button:disabled {
   color: #e2e8f0;
   padding: 0.75rem;
   border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.logout-btn {
+  padding: 0.5rem;
+  border: 1px solid #475569;
+  border-radius: 0.5rem;
+  background: #1e293b;
+  color: #e2e8f0;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.logout-btn:hover:not(:disabled) {
+  background: #334155;
+  border-color: #64748b;
+}
+
+.logout-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 </style>
 

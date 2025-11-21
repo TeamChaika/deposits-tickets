@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.core.config import get_settings
-from app.routers import auth
+from app.routers import auth, establishment, event, upload, deposit, ticket, promo_code
 
 
 def create_app() -> FastAPI:
@@ -18,6 +18,12 @@ def create_app() -> FastAPI:
         allow_headers=["*"],
     )
     application.include_router(auth.router, prefix=settings.api_prefix)
+    application.include_router(establishment.router, prefix=settings.api_prefix)
+    application.include_router(event.router, prefix=settings.api_prefix)
+    application.include_router(upload.router, prefix=settings.api_prefix)
+    application.include_router(deposit.router, prefix=settings.api_prefix)
+    application.include_router(ticket.router, prefix=settings.api_prefix)
+    application.include_router(promo_code.router, prefix=settings.api_prefix)
     return application
 
 

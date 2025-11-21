@@ -15,7 +15,7 @@ const handleRequest = () =>
 
 const handleReset = () =>
   store.resetPassword({
-    access_token: resetToken.value,
+    recovery_token: resetToken.value,
     new_password: newPassword.value,
   });
 </script>

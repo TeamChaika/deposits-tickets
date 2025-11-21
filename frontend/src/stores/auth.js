@@ -3,6 +3,7 @@ import {
   changeEmail,
   changePassword,
   loginUser,
+  logoutUser,
   registerUser,
   requestPasswordReset,
   resetPassword,
@@ -51,6 +52,15 @@ export const useAuthStore = defineStore("auth", {
     async changeEmail(payload) {
       await this.executeTask(async () => {
         const response = await changeEmail(payload);
+        this.statusMessage = response.message;
+      });
+    },
+    async logout() {
+      await this.executeTask(async () => {
+        const response = await logoutUser({
+          access_token: this.accessToken,
+        });
+        this.accessToken = "";
         this.statusMessage = response.message;
       });
     },

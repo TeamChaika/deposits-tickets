@@ -5,11 +5,17 @@ import { useAuthStore } from "../stores/auth";
 const store = useAuthStore();
 const email = ref("");
 const password = ref("");
+const phone = ref("");
+const firstName = ref("");
+const lastName = ref("");
 
 const handleRegister = () =>
   store.register({
     email: email.value,
     password: password.value,
+    phone: phone.value,
+    first_name: firstName.value,
+    last_name: lastName.value,
   });
 </script>
 
@@ -24,6 +30,18 @@ const handleRegister = () =>
       <label>
         Пароль
         <input v-model="password" type="password" placeholder="********" required />
+      </label>
+      <label>
+        Номер телефона
+        <input v-model="phone" type="tel" placeholder="+7 (999) 123-45-67" required />
+      </label>
+      <label>
+        Имя
+        <input v-model="firstName" type="text" placeholder="Иван" required />
+      </label>
+      <label>
+        Фамилия
+        <input v-model="lastName" type="text" placeholder="Иванов" required />
       </label>
       <button :disabled="store.loading" type="submit">
         {{ store.loading ? "..." : "Создать аккаунт" }}

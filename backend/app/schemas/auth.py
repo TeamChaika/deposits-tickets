@@ -6,6 +6,9 @@ from pydantic import BaseModel, EmailStr
 class RegisterRequest(BaseModel):
     email: EmailStr
     password: str
+    phone: str
+    first_name: str
+    last_name: str
 
 
 class LoginRequest(BaseModel):
@@ -18,7 +21,7 @@ class PasswordResetRequest(BaseModel):
 
 
 class PasswordResetConfirmRequest(BaseModel):
-    access_token: str
+    recovery_token: str
     new_password: str
 
 
@@ -30,6 +33,10 @@ class ChangePasswordRequest(BaseModel):
 class ChangeEmailRequest(BaseModel):
     access_token: str
     new_email: EmailStr
+
+
+class LogoutRequest(BaseModel):
+    access_token: str | None = None
 
 
 class MessageResponse(BaseModel):
